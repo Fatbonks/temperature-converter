@@ -58,11 +58,14 @@ temperature_converter_fahrenheit_button = ttk.Button(temperature_frame, text="Co
 temperature_converter_fahrenheit_button.grid(row=1, column=2, sticky="WE", padx=10, pady=5)
 
 save_degrees_log_button = ttk.Button(temperature_frame, text="Save degree log")
-save_degrees_log_button.grid(row=4, column=0, sticky="WE", padx=10, pady=5)
+save_degrees_log_button.grid(row=4, column=0, sticky="NSEW", padx=10, pady=5)
 save_fahrenheit_log_button = ttk.Button(temperature_frame, text="Save fahrenheit log")
-save_fahrenheit_log_button.grid(row=4, column=2, sticky="WE", padx=10, pady=5)
+save_fahrenheit_log_button.grid(row=4, column=2, sticky="NSEW", padx=10, pady=5)
 
 output_logs_button = ttk.Button(temperature_frame, text="Output logs")
-output_logs_button.grid(row=4, column=1, sticky="WE", padx=10, pady=5)
+output_logs_button.grid(row=4, column=1, sticky="NSEW", padx=10, pady=5)
+
+help_button = ttk.Button(temperature_frame, text="Help!")
+help_button.grid(row=3, column=1, sticky="NSEW", padx=10, pady=5)
 # run the mainloop
 root.mainloop()
