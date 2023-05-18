@@ -17,7 +17,6 @@ def create_output_box():
 
     check = Listbox(f1)
     check.insert(0, *lis)
-    check.bindtags(check)
     check.grid(row=1, column=0)
     output_window.resizable(False, False)
     output_window.grab_set()
