@@ -1,9 +1,13 @@
 from tkinter import *
-from tkinter import ttk
+from tkinter import ttk, filedialog
+import os
+from tkinter import filedialog as fd
 
 lis = ["first", "second"]
+
+
 def print_temp():
-    print(temperature_degrees.get(), "/", temperature_fahrenheit.get())
+    pass
 
 
 def create_output_box():
@@ -12,13 +16,41 @@ def create_output_box():
 
     f1 = Frame(output_window)
     f1.grid(row=0, column=0)
-    label = Label(f1, text="Degrees Logs")
-    label.grid(row=0, column=0)
 
-    check = Listbox(f1)
-    check.insert(0, *lis)
-    check.grid(row=1, column=0)
+    degrees_label = Label(f1, text="Degrees Logs")
+    degrees_label.grid(row=0, column=0)
+
+    fahrenheit_label = Label(f1, text="Fahrenheit Logs")
+    fahrenheit_label.grid(row=0, column=3)
+
+    degrees_list = Listbox(f1)
+    degrees_list.insert(0, *lis)
+    degrees_list.grid(row=1, column=0, sticky="NSEW", padx=10, pady=5)
+
+    fahrenheit_list = Listbox(f1)
+    fahrenheit_list.insert(0, *lis)
+    fahrenheit_list.grid(row=1, column=3, sticky="NSEW", padx=10, pady=5)
+
+    degrees_output_log = ttk.Button(f1, text="Output degree logs", command=create_file_location_box)
+    degrees_output_log.grid(row=2, column=0)
+
     output_window.resizable(False, False)
+    output_window.grab_set()
+
+
+def create_file_location_box():
+    output_window = Toplevel(root)
+    output_window.title("File Location")
+
+    f1 = Frame(output_window)
+    f1.grid(row=0, column=0)
+
+    file_location = os.path.dirname(os.path.realpath(__file__))
+    file_label = ttk.Label(f1,
+                           text="Your outputted logs are saved here!, \n" + file_location + "\n, press the X button "
+                                                                                            "on the top right to "
+                                                                                            "leave window")
+    file_label.grid(row=0, column=0)
     output_window.grab_set()
 
 
@@ -47,10 +79,12 @@ output_label_2 = ttk.Label(temperature_frame, text="Output")
 output_label_2.grid(row=2, column=2)
 
 # variables that hold values for temperature either in degrees or fahrenheit
-temperature_degrees = IntVar()
-temperature_fahrenheit = IntVar()
-temperature_degrees_output = IntVar()
-temperature_fahrenheit_output = IntVar()
+temperature_degrees = StringVar()
+temperature_degrees.set("0°F")
+temperature_fahrenheit = StringVar()
+temperature_fahrenheit.set("0°C")
+temperature_degrees_output = StringVar()
+temperature_fahrenheit_output = StringVar()
 
 # hold the inputted that is going to be used to convert either into degrees or fahrenheit
 temperature_degrees_input_entry = ttk.Entry(temperature_frame, textvariable=temperature_degrees)
@@ -67,7 +101,7 @@ temperature_fahrenheit_entry = ttk.Entry(temperature_frame, textvariable=tempera
 temperature_fahrenheit_entry.grid(row=3, column=2, padx=5, pady=5)
 
 # buttons that when press will convert the inputted temperature to either degrees or fahrenheit
-temperature_converter_degrees_button = ttk.Button(temperature_frame, text="Convert to degrees")
+temperature_converter_degrees_button = ttk.Button(temperature_frame, text="Convert to degrees", command=print_temp)
 temperature_converter_degrees_button.grid(row=1, column=0, sticky="WE", padx=10, pady=5)
 temperature_converter_fahrenheit_button = ttk.Button(temperature_frame, text="Convert to fahrenheit")
 temperature_converter_fahrenheit_button.grid(row=1, column=2, sticky="WE", padx=10, pady=5)
