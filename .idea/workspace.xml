@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0955492e-d6ab-4ed2-9743-af8e4708f9e5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-    </list>
+    <list default="true" id="0955492e-d6ab-4ed2-9743-af8e4708f9e5" name="Changes" comment="added more functions &#10;output window almost done&#10;output now show where text will be located" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -73,6 +71,14 @@
       <option name="presentableId" value="Default" />
       <updated>1682564586368</updated>
     </task>
+    <task id="LOCAL-00001" summary="added more functions &#10;output window almost done&#10;output now show where text will be located">
+      <created>1684795113387</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1684795113387</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -85,5 +91,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added more functions &#10;output window almost done&#10;output now show where text will be located" />
+    <option name="LAST_COMMIT_MESSAGE" value="added more functions &#10;output window almost done&#10;output now show where text will be located" />
   </component>
 </project>
