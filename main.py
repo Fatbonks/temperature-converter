@@ -11,6 +11,11 @@ def print_temp():
 
 
 def create_output_box():
+    def clear_logs():
+        fahrenheit_list.delete(0, END)
+        degrees_list.delete(0, END)
+        print("works")
+
     output_window = Toplevel(root)
     output_window.title("Output Window")
 
@@ -31,8 +36,11 @@ def create_output_box():
     fahrenheit_list.insert(0, *lis)
     fahrenheit_list.grid(row=1, column=3, sticky="NSEW", padx=10, pady=5)
 
-    degrees_output_log = ttk.Button(f1, text="Output degree logs", command=create_file_location_box)
-    degrees_output_log.grid(row=2, column=0)
+    degrees_output_log = ttk.Button(f1, text="Output logs", command=create_file_location_box)
+    degrees_output_log.grid(row=2, column=1, sticky="NSEW", padx=10, pady=5)
+
+    degrees_output_log = ttk.Button(f1, text="Clear", command=clear_logs)
+    degrees_output_log.grid(row=1, column=1, sticky="SEW", padx=10, pady=5)
 
     output_window.resizable(False, False)
     output_window.grab_set()
