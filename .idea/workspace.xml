@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0955492e-d6ab-4ed2-9743-af8e4708f9e5" name="Changes" comment="">
+    <list default="true" id="0955492e-d6ab-4ed2-9743-af8e4708f9e5" name="Changes" comment="added more functions &#10;output window almost done&#10;output now show where text will be located">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>

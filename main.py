@@ -3,18 +3,61 @@ from tkinter import ttk, filedialog
 import os
 from tkinter import filedialog as fd
 
-lis = ["first", "second"]
+lis = []
 
 
-def print_temp():
-    pass
+def save_log(temp_type):
+    if temp_type == "degrees":
+        try:
+            degrees = float(temperature_degrees.get())
+            if temp_type == "degrees":
+                var = (degrees - 32) * 5 / 9
+                temperature_degrees_output.set(str(var))
+                output_temp_in_list = "{}°F to {}°C".format(temperature_degrees_input_entry.get,
+                                                            temperature_degrees_output.get)
+                if lis[0] != output_temp_in_list:
+                    lis.insert(0, output_temp_in_list)
+        except ValueError:
+            temperature_degrees_output.set("please input a number")
+
+    if temp_type == "fahrenheit":
+        try:
+            fahrenheit = float(temperature_fahrenheit.get())
+            var = (fahrenheit * 9 / 5) + 32
+            temperature_fahrenheit_output.set(str(var))
+
+        except ValueError:
+            pass
+
+
+def temp_convert(temp_type):
+    if temp_type == "degrees":
+        try:
+            degrees = float(temperature_degrees.get())
+            if temp_type == "degrees":
+                var = (degrees - 32) * 5 / 9
+                temperature_degrees_output.set(str(var))
+                output_temp_in_list = "{}°F to {}°C".format(temperature_degrees_input_entry.get,
+                                                            temperature_degrees_output.get)
+                if lis[0] != output_temp_in_list:
+                    lis.insert(0, output_temp_in_list)
+        except ValueError:
+            temperature_degrees_output.set("please input a number")
+
+    if temp_type == "fahrenheit":
+        try:
+            fahrenheit = float(temperature_fahrenheit.get())
+            var = (fahrenheit * 9 / 5) + 32
+            temperature_fahrenheit_output.set(str(var))
+
+        except ValueError:
+            temperature_fahrenheit_output.set("please input a number")
 
 
 def create_output_box():
     def clear_logs():
         fahrenheit_list.delete(0, END)
         degrees_list.delete(0, END)
-        print("works")
 
     output_window = Toplevel(root)
     output_window.title("Output Window")
@@ -109,9 +152,11 @@ temperature_fahrenheit_entry = ttk.Entry(temperature_frame, textvariable=tempera
 temperature_fahrenheit_entry.grid(row=3, column=2, padx=5, pady=5)
 
 # buttons that when press will convert the inputted temperature to either degrees or fahrenheit
-temperature_converter_degrees_button = ttk.Button(temperature_frame, text="Convert to degrees", command=print_temp)
+temperature_converter_degrees_button = ttk.Button(temperature_frame, text="Convert to degrees",
+                                                  command=lambda: temp_convert("degrees"))
 temperature_converter_degrees_button.grid(row=1, column=0, sticky="WE", padx=10, pady=5)
-temperature_converter_fahrenheit_button = ttk.Button(temperature_frame, text="Convert to fahrenheit")
+temperature_converter_fahrenheit_button = ttk.Button(temperature_frame, text="Convert to fahrenheit",
+                                                     command=lambda: temp_convert("fahrenheit"))
 temperature_converter_fahrenheit_button.grid(row=1, column=2, sticky="WE", padx=10, pady=5)
 
 save_degrees_log_button = ttk.Button(temperature_frame, text="Save degree log")
