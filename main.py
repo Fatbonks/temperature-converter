@@ -3,8 +3,6 @@ from tkinter import ttk, filedialog
 import os
 from tkinter import filedialog as fd
 
-lis = []
-
 
 def save_log(temp_type):
     if temp_type == "degrees":
@@ -13,10 +11,14 @@ def save_log(temp_type):
             if temp_type == "degrees":
                 var = (degrees - 32) * 5 / 9
                 temperature_degrees_output.set(str(var))
-                output_temp_in_list = "{}°F to {}°C".format(temperature_degrees_input_entry.get,
-                                                            temperature_degrees_output.get)
-                if lis[0] != output_temp_in_list:
-                    lis.insert(0, output_temp_in_list)
+                new_input = float(temperature_degrees_input_entry.get())
+                new_output = float(temperature_degrees_output.get())
+                output_temp_in_list = "{:1f}°F to {:1f}°C".format(new_input, new_output)
+                try:
+                    if lis[1] != output_temp_in_list:
+                        lis.insert(1, output_temp_in_list)
+                except IndexError:
+                    lis.insert(1, output_temp_in_list)
         except ValueError:
             temperature_degrees_output.set("please input a number")
 
@@ -37,10 +39,6 @@ def temp_convert(temp_type):
             if temp_type == "degrees":
                 var = (degrees - 32) * 5 / 9
                 temperature_degrees_output.set(str(var))
-                output_temp_in_list = "{}°F to {}°C".format(temperature_degrees_input_entry.get,
-                                                            temperature_degrees_output.get)
-                if lis[0] != output_temp_in_list:
-                    lis.insert(0, output_temp_in_list)
         except ValueError:
             temperature_degrees_output.set("please input a number")
 
@@ -54,17 +52,18 @@ def temp_convert(temp_type):
             temperature_fahrenheit_output.set("please input a number")
 
 
-def create_output_box():
-    def clear_logs():
-        fahrenheit_list.delete(0, END)
-        degrees_list.delete(0, END)
+def clear_logs():
+    fahrenheit_list.delete(0, END)
+    degrees_list.delete(0, END)
 
+
+def create_output_box():
+    global fahrenheit_list
+    global degrees_list
     output_window = Toplevel(root)
     output_window.title("Output Window")
-
     f1 = Frame(output_window)
     f1.grid(row=0, column=0)
-
     degrees_label = Label(f1, text="Degrees Logs")
     degrees_label.grid(row=0, column=0)
 
@@ -72,11 +71,9 @@ def create_output_box():
     fahrenheit_label.grid(row=0, column=3)
 
     degrees_list = Listbox(f1)
-    degrees_list.insert(0, *lis)
     degrees_list.grid(row=1, column=0, sticky="NSEW", padx=10, pady=5)
-
+    degrees_list.insert(0, *lis)
     fahrenheit_list = Listbox(f1)
-    fahrenheit_list.insert(0, *lis)
     fahrenheit_list.grid(row=1, column=3, sticky="NSEW", padx=10, pady=5)
 
     degrees_output_log = ttk.Button(f1, text="Output logs", command=create_file_location_box)
@@ -111,6 +108,10 @@ root.title("Temperature Converter")
 # the main frame of the programs hold everything from text frame and temperature frame
 main_frame = ttk.Frame(root)
 main_frame.grid(row=0, column=0)
+
+lis = ["Outputs:"]
+fahrenheit_list = Listbox()
+degrees_list = Listbox()
 
 # a frame for the program only holds the text UI elements
 text_frame = ttk.Frame(main_frame)
@@ -159,7 +160,7 @@ temperature_converter_fahrenheit_button = ttk.Button(temperature_frame, text="Co
                                                      command=lambda: temp_convert("fahrenheit"))
 temperature_converter_fahrenheit_button.grid(row=1, column=2, sticky="WE", padx=10, pady=5)
 
-save_degrees_log_button = ttk.Button(temperature_frame, text="Save degree log")
+save_degrees_log_button = ttk.Button(temperature_frame, text="Save degree log", command=lambda: save_log("degrees"))
 save_degrees_log_button.grid(row=4, column=0, sticky="NSEW", padx=10, pady=5)
 save_fahrenheit_log_button = ttk.Button(temperature_frame, text="Save fahrenheit log")
 save_fahrenheit_log_button.grid(row=4, column=2, sticky="NSEW", padx=10, pady=5)
