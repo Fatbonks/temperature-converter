@@ -13,12 +13,12 @@ def save_log(temp_type):
                 temperature_degrees_output.set(str(var))
                 new_input = float(temperature_degrees_input_entry.get())
                 new_output = float(temperature_degrees_output.get())
-                output_temp_in_list = "{:1f}°F to {:1f}°C".format(new_input, new_output)
-                try:
-                    if lis[1] != output_temp_in_list:
-                        lis.insert(1, output_temp_in_list)
-                except IndexError:
+                print(new_output, new_input)
+                output_temp_in_list = "{:.2f}°F to {:.2f}°C".format(new_input, new_output)
+
+                if output_temp_in_list not in lis:
                     lis.insert(1, output_temp_in_list)
+
         except ValueError:
             temperature_degrees_output.set("please input a number")
 
