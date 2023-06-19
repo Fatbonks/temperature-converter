@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk, filedialog
 import os
+from PIL import ImageTk, Image
 from tkinter import filedialog as fd
 
 
@@ -8,16 +9,14 @@ def save_log(temp_type):
     if temp_type == "degrees":
         try:
             degrees = float(temperature_degrees.get())
-            if temp_type == "degrees":
-                var = (degrees - 32) * 5 / 9
-                temperature_degrees_output.set(str(var))
+            var = (degrees - 32) * 5 / 9
+            if var > -273.16:
                 new_input = float(temperature_degrees_input_entry.get())
                 new_output = float(temperature_degrees_output.get())
-                print(new_output, new_input)
                 output_temp_in_list = "{:.2f}°F to {:.2f}°C".format(new_input, new_output)
 
-                if output_temp_in_list not in lis:
-                    lis.insert(1, output_temp_in_list)
+                if output_temp_in_list not in degrees_output_list:
+                    degrees_output_list.insert(1, output_temp_in_list)
 
         except ValueError:
             temperature_degrees_output.set("please input a number")
@@ -25,11 +24,17 @@ def save_log(temp_type):
     if temp_type == "fahrenheit":
         try:
             fahrenheit = float(temperature_fahrenheit.get())
-            var = (fahrenheit * 9 / 5) + 32
-            temperature_fahrenheit_output.set(str(var))
+            var = (fahrenheit - 32) * 5 / 9
+            if var > -459.67:
+                new_input = float(temperature_fahrenheit_entry.get())
+                new_output = float(temperature_fahrenheit_output.get())
+                output_temp_in_list = "{:.2f}°C to {:.2f}°F".format(new_input, new_output)
+
+                if output_temp_in_list not in fahrenheit_output_list:
+                    fahrenheit_output_list.insert(1, output_temp_in_list)
 
         except ValueError:
-            pass
+            temperature_fahrenheit_output.set("please input a number")
 
 
 def temp_convert(temp_type):
@@ -38,7 +43,10 @@ def temp_convert(temp_type):
             degrees = float(temperature_degrees.get())
             if temp_type == "degrees":
                 var = (degrees - 32) * 5 / 9
-                temperature_degrees_output.set(str(var))
+                if var > -273.15:
+                    temperature_degrees_output.set(str(var))
+                else:
+                    temperature_degrees_output.set("number below zero")
         except ValueError:
             temperature_degrees_output.set("please input a number")
 
@@ -46,7 +54,10 @@ def temp_convert(temp_type):
         try:
             fahrenheit = float(temperature_fahrenheit.get())
             var = (fahrenheit * 9 / 5) + 32
-            temperature_fahrenheit_output.set(str(var))
+            if var > -459.67:
+                temperature_fahrenheit_output.set(str(var))
+            else:
+                temperature_fahrenheit_output.set("number below zero")
 
         except ValueError:
             temperature_fahrenheit_output.set("please input a number")
@@ -55,6 +66,10 @@ def temp_convert(temp_type):
 def clear_logs():
     fahrenheit_list.delete(0, END)
     degrees_list.delete(0, END)
+    degrees_output_list.clear()
+    degrees_output_list.insert(0, "Output:")
+    fahrenheit_output_list.clear()
+    fahrenheit_output_list.insert(0, "Output:")
 
 
 def create_output_box():
@@ -64,7 +79,7 @@ def create_output_box():
     output_window.title("Output Window")
     f1 = Frame(output_window)
     f1.grid(row=0, column=0)
-    degrees_label = Label(f1, text="Degrees Logs")
+    degrees_label = Label(f1, text="Celsius  Logs")
     degrees_label.grid(row=0, column=0)
 
     fahrenheit_label = Label(f1, text="Fahrenheit Logs")
@@ -72,8 +87,9 @@ def create_output_box():
 
     degrees_list = Listbox(f1)
     degrees_list.grid(row=1, column=0, sticky="NSEW", padx=10, pady=5)
-    degrees_list.insert(0, *lis)
+    degrees_list.insert(0, *degrees_output_list)
     fahrenheit_list = Listbox(f1)
+    fahrenheit_list.insert(0, *fahrenheit_output_list)
     fahrenheit_list.grid(row=1, column=3, sticky="NSEW", padx=10, pady=5)
 
     degrees_output_log = ttk.Button(f1, text="Output logs", command=create_file_location_box)
@@ -84,6 +100,18 @@ def create_output_box():
 
     output_window.resizable(False, False)
     output_window.grab_set()
+
+
+def create_help_box():
+
+    help_window = Toplevel(root)
+    help_window.title("Help Window")
+    f1 = Frame(help_window)
+    f1.grid(row=0, column=0)
+    program_label = ttk.Label(f1, image=image)
+    program_label.grid(column=0, row=0)
+    help_window.resizable(False, False)
+    help_window.grab_set()
 
 
 def create_file_location_box():
@@ -108,8 +136,11 @@ root.title("Temperature Converter")
 # the main frame of the programs hold everything from text frame and temperature frame
 main_frame = ttk.Frame(root)
 main_frame.grid(row=0, column=0)
-
-lis = ["Outputs:"]
+o_image = Image.open("how to use program.png")
+resize_image = o_image.resize((700, 500))
+image = ImageTk.PhotoImage(resize_image)
+degrees_output_list = ["Outputs:"]
+fahrenheit_output_list = ["Outputs:"]
 fahrenheit_list = Listbox()
 degrees_list = Listbox()
 
@@ -153,22 +184,23 @@ temperature_fahrenheit_entry = ttk.Entry(temperature_frame, textvariable=tempera
 temperature_fahrenheit_entry.grid(row=3, column=2, padx=5, pady=5)
 
 # buttons that when press will convert the inputted temperature to either degrees or fahrenheit
-temperature_converter_degrees_button = ttk.Button(temperature_frame, text="Convert to degrees",
+temperature_converter_degrees_button = ttk.Button(temperature_frame, text="Convert to celsius",
                                                   command=lambda: temp_convert("degrees"))
 temperature_converter_degrees_button.grid(row=1, column=0, sticky="WE", padx=10, pady=5)
 temperature_converter_fahrenheit_button = ttk.Button(temperature_frame, text="Convert to fahrenheit",
                                                      command=lambda: temp_convert("fahrenheit"))
 temperature_converter_fahrenheit_button.grid(row=1, column=2, sticky="WE", padx=10, pady=5)
 
-save_degrees_log_button = ttk.Button(temperature_frame, text="Save degree log", command=lambda: save_log("degrees"))
+save_degrees_log_button = ttk.Button(temperature_frame, text="Save celsius log", command=lambda: save_log("degrees"))
 save_degrees_log_button.grid(row=4, column=0, sticky="NSEW", padx=10, pady=5)
-save_fahrenheit_log_button = ttk.Button(temperature_frame, text="Save fahrenheit log")
+save_fahrenheit_log_button = ttk.Button(temperature_frame, text="Save fahrenheit log",
+                                        command=lambda: save_log("fahrenheit"))
 save_fahrenheit_log_button.grid(row=4, column=2, sticky="NSEW", padx=10, pady=5)
 
 output_logs_button = ttk.Button(temperature_frame, text="Output logs", command=create_output_box)
 output_logs_button.grid(row=4, column=1, sticky="NSEW", padx=10, pady=5)
 
-help_button = ttk.Button(temperature_frame, text="Help!")
+help_button = ttk.Button(temperature_frame, text="Help!", command=create_help_box)
 help_button.grid(row=3, column=1, sticky="NSEW", padx=10, pady=5)
 # run the mainloop
 root.resizable(False, False)

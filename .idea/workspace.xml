@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0955492e-d6ab-4ed2-9743-af8e4708f9e5" name="Changes" comment="added more functions &#10;output window almost done&#10;output now show where text will be located">
+    <list default="true" id="0955492e-d6ab-4ed2-9743-af8e4708f9e5" name="Changes" comment="fixed multiple outputs in list">
+      <change afterPath="$PROJECT_DIR$/how to use program.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,6 +38,11 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.tools&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="\\melville-high.school.nz\student\home\av19118\Desktop\temp_converter\temperature-converter" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="temperature-converter" />
@@ -80,7 +87,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684795113387</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fixed multiple outputs in list">
+      <created>1686519577013</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1686519577013</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -96,6 +110,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added more functions &#10;output window almost done&#10;output now show where text will be located" />
-    <option name="LAST_COMMIT_MESSAGE" value="added more functions &#10;output window almost done&#10;output now show where text will be located" />
+    <MESSAGE value="fixed multiple outputs in list" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed multiple outputs in list" />
   </component>
 </project>
