@@ -103,7 +103,6 @@ def create_output_box():
 
 
 def create_help_box():
-
     help_window = Toplevel(root)
     help_window.title("Help Window")
     f1 = Frame(help_window)
@@ -115,6 +114,7 @@ def create_help_box():
 
 
 def create_file_location_box():
+    global file_created
     output_window = Toplevel(root)
     output_window.title("File Location")
 
@@ -126,6 +126,16 @@ def create_file_location_box():
                            text="Your outputted logs are saved here!, \n" + file_location + "\n, press the X button "
                                                                                             "on the top right to "
                                                                                             "leave window")
+    with open('Output Logs_{}.txt'.format(file_created), 'w') as f:
+        file_created += 1
+        f.write("Fahrenheit" + "\n")
+        for i in range(len(fahrenheit_output_list)):
+            f.write(str(fahrenheit_output_list[i]) + "\n")
+        f.write("\n")
+        f.write("Celsius" + "\n")
+        for i in range(len(degrees_output_list)):
+            f.write(str(degrees_output_list[i]) + "\n")
+
     file_label.grid(row=0, column=0)
     output_window.grab_set()
 
@@ -136,6 +146,7 @@ root.title("Temperature Converter")
 # the main frame of the programs hold everything from text frame and temperature frame
 main_frame = ttk.Frame(root)
 main_frame.grid(row=0, column=0)
+file_created = 0
 o_image = Image.open("how to use program.png")
 resize_image = o_image.resize((700, 500))
 image = ImageTk.PhotoImage(resize_image)
